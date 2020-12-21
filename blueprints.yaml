@@ -8,11 +8,10 @@ author:
   name: NicoHood
   email: grav@nicohood.de
 homepage: https://github.com/NicoHood/grav-plugin-matomo
-demo: http://demo.yoursite.com
 keywords: grav, plugin, etc
 bugs: https://github.com/NicoHood/grav-plugin-matomo/issues
 docs: https://github.com/NicoHood/grav-plugin-matomo/blob/develop/README.md
-license: MIT
+license: GPL3
 
 dependencies:
   - { name: grav, version: '>=1.6.0' }
