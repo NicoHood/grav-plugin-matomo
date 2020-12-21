@@ -8,4 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
     'Grav\\Plugin\\MatomoPlugin' => $baseDir . '/matomo.php',
+    'MatomoTracker' => $vendorDir . '/matomo/matomo-php-tracker/MatomoTracker.php',
+    'PiwikTracker' => $vendorDir . '/matomo/matomo-php-tracker/PiwikTracker.php',
+    'Unit\\MatomoTrackerTest' => $vendorDir . '/matomo/matomo-php-tracker/tests/Unit/MatomoTrackerTest.php',
 );

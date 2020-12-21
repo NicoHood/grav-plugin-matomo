@@ -6,11 +6,20 @@
     'aliases' => 
     array (
     ),
-    'reference' => 'c2056a6007cf469480b7d0a119a5ff6a173dd3f3',
+    'reference' => '211ceb5c20cf166d587221442fdbc09597854a2f',
     'name' => 'nicohood/matomo',
   ),
   'versions' => 
   array (
+    'matomo/matomo-php-tracker' => 
+    array (
+      'pretty_version' => '3.0.0',
+      'version' => '3.0.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '31e2b0bdf479c6fc00758228d2c6d7c85c1863a0',
+    ),
     'nicohood/matomo' => 
     array (
       'pretty_version' => 'dev-master',
@@ -18,7 +27,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => 'c2056a6007cf469480b7d0a119a5ff6a173dd3f3',
+      'reference' => '211ceb5c20cf166d587221442fdbc09597854a2f',
     ),
   ),
 );

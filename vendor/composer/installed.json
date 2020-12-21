@@ -1,5 +1,65 @@
 {
-    "packages": [],
+    "packages": [
+        {
+            "name": "matomo/matomo-php-tracker",
+            "version": "3.0.0",
+            "version_normalized": "3.0.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/matomo-org/matomo-php-tracker.git",
+                "reference": "31e2b0bdf479c6fc00758228d2c6d7c85c1863a0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/matomo-org/matomo-php-tracker/zipball/31e2b0bdf479c6fc00758228d2c6d7c85c1863a0",
+                "reference": "31e2b0bdf479c6fc00758228d2c6d7c85c1863a0",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "php": ">=5.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.3"
+            },
+            "suggest": {
+                "ext-curl": "Using this extension to issue the HTTPS request to Matomo"
+            },
+            "time": "2020-11-21T05:20:05+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "classmap": [
+                    "."
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-2-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "The Matomo Team",
+                    "email": "hello@matomo.org",
+                    "homepage": "https://matomo.org/team/"
+                }
+            ],
+            "description": "PHP Client for Matomo Analytics Tracking API",
+            "homepage": "https://matomo.org",
+            "keywords": [
+                "analytics",
+                "matomo",
+                "piwik",
+                "tracker"
+            ],
+            "support": {
+                "forum": "https://forum.matomo.org/",
+                "issues": "https://github.com/matomo-org/matomo-php-tracker/issues",
+                "source": "https://github.com/matomo-org/matomo-php-tracker"
+            },
+            "install-path": "../matomo/matomo-php-tracker"
+        }
+    ],
     "dev": true,
     "dev-package-names": []
 }
