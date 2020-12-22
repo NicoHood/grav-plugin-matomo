@@ -1,14 +1,14 @@
 name: Matomo
 slug: matomo
 type: plugin
-version: 0.1.0
+version: 1.0.0
 description: Integrate Matomo analytics into Grav CMS
 icon: plug
 author:
   name: NicoHood
   email: grav@nicohood.de
 homepage: https://github.com/NicoHood/grav-plugin-matomo
-keywords: grav, plugin, etc
+keywords: grav, plugin, matomo, piwik, tracking, analytics, log, visitor, count
 bugs: https://github.com/NicoHood/grav-plugin-matomo/issues
 docs: https://github.com/NicoHood/grav-plugin-matomo/blob/develop/README.md
 license: GPL3
@@ -29,7 +29,61 @@ form:
         0: PLUGIN_ADMIN.DISABLED
       validate:
         type: bool
-    text_var:
-      type: text
-      label: PLUGIN_MATOMO.TEXT_VARIABLE
-      help: PLUGIN_MATOMO.TEXT_VARIABLE_HELP
+
+    connection:
+      type: section
+      title: PLUGIN_MATOMO.CONNECTION
+
+      fields:
+        matomo_url:
+          type: text
+          placeholder: 'https://example.tld'
+          label: PLUGIN_MATOMO.MATOMO_URL
+          help: PLUGIN_MATOMO.MATOMO_URL_HELP
+          validate:
+            required: true
+
+        site_id:
+          type: number
+          placeholder: '1'
+          label: PLUGIN_MATOMO.SITE_ID
+          help: PLUGIN_MATOMO.SITE_ID_HELP
+          validate:
+            min: 1
+            required: true
+
+        token:
+          type: text
+          label: PLUGIN_MATOMO.MATOMO_TOKEN
+          help: PLUGIN_MATOMO.MATOMO_TOKEN_HELP
+          validate:
+            required: true
+
+    privacy:
+      type: section
+      title: PLUGIN_MATOMO.PRIVACY
+
+      fields:
+        respect_do_not_track:
+          type: toggle
+          label: PLUGIN_MATOMO.RESPECT_DO_NOT_TRACK
+          help: PLUGIN_MATOMO.RESPECT_DO_NOT_TRACK_HELP
+          highlight: 1
+          default: 1
+          options:
+            1: PLUGIN_ADMIN.ENABLED
+            0: PLUGIN_ADMIN.DISABLED
+          validate:
+            type: bool
+
+        enable_cookies:
+          type: toggle
+          label: PLUGIN_MATOMO.ENABLE_COOKIES
+          help: PLUGIN_MATOMO.ENABLE_COOKIES_HELP
+          highlight: 1
+          default: 0
+          options:
+            1: PLUGIN_ADMIN.ENABLED
+            0: PLUGIN_ADMIN.DISABLED
+          validate:
+            type: bool

@@ -1,3 +1,15 @@
 en:
   PLUGIN_MATOMO:
     INVALID_CONFIG: 'Invalid Matomo configuration detected'
+    CONNECTION: 'Connection'
+    MATOMO_URL: 'Matomo URL'
+    MATOMO_URL_HELP: 'The URL of your matomo installation'
+    SITE_ID: 'Site Id'
+    SITE_ID_HELP: 'If you measure several websites you must specify the site id. See https://matomo.org/faq/general/faq_19212/'
+    MATOMO_TOKEN: 'Matomo Token'
+    MATOMO_TOKEN_HELP: 'The authentication token of Matomo. See https://matomo.org/faq/general/faq_114/'
+    PRIVACY: 'Privacy'
+    RESPECT_DO_NOT_TRACK: 'Respect "Do Not Track" browser setting'
+    RESPECT_DO_NOT_TRACK_HELP: 'If the browser sends a "Do Not Track" header, the visit will not be counted.'
+    ENABLE_COOKIES: 'Enable Cookies'
+    ENABLE_COOKIES_HELP: 'Can be used to set cookies for better user tracking. Note that this may require an idditional cookie banner to be GDPR/DSGVO compliant.'
