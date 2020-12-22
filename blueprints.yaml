@@ -3,7 +3,7 @@ slug: matomo
 type: plugin
 version: 1.0.0
 description: Integrate Matomo analytics into Grav CMS
-icon: plug
+icon: bar-chart
 author:
   name: NicoHood
   email: grav@nicohood.de
