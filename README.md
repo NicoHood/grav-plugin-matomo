@@ -1,6 +1,8 @@
 # Matomo Plugin
 
-The **Matomo** Plugin is an extension for [Grav CMS](http://github.com/getgrav/grav). It integrates Matomo analytics into Grav CMS.
+The **Matomo** Plugin is an extension for [Grav CMS](http://github.com/getgrav/grav). It integrates Matomo analytics into Grav CMS. Unlike other plugins this supports **server side tracking** via [Matomo PHP Tracking API](https://github.com/matomo-org/matomo-php-tracker). This plugin **requires no client side Javascript** but is easier to use compared to [Matomo Log Analysis](https://matomo.org/docs/log-analytics-tool-how-to/). Optional Javascript support will be added shortly.
+
+<a href="https://www.buymeacoffee.com/nicohood" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
 
 ## Installation
 
