@@ -1,2 +1,11 @@
 enabled: true
-text_var: Custom Text added by the **Matomo** plugin (disable plugin to remove)
+active: true
+
+matomo_url: 'https://example.tld'
+site_id: 1
+# It is recommended to set the token via the grav dotenv plugin:
+# https://github.com/Ralla/grav-plugin-dotenv
+token: ''
+
+respect_do_not_track: true
+enable_cookies: false

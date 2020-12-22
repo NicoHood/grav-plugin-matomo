@@ -29,7 +29,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '211ceb5c20cf166d587221442fdbc09597854a2f',
+    'reference' => '649991acad865b117bec26447013009fb007dba0',
     'name' => 'nicohood/matomo',
   ),
   'versions' => 
@@ -50,7 +50,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '211ceb5c20cf166d587221442fdbc09597854a2f',
+      'reference' => '649991acad865b117bec26447013009fb007dba0',
     ),
   ),
 );
