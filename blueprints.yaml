@@ -46,6 +46,7 @@ form:
         site_id:
           type: number
           placeholder: '1'
+          default: 1
           label: PLUGIN_MATOMO.SITE_ID
           help: PLUGIN_MATOMO.SITE_ID_HELP
           validate:

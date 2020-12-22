@@ -1,11 +1,13 @@
 enabled: true
 active: true
 
+# Connection settings
 matomo_url: 'https://example.tld'
 site_id: 1
 # It is recommended to set the token via the grav dotenv plugin:
 # https://github.com/Ralla/grav-plugin-dotenv
 token: ''
 
+# Privacy settings
 respect_do_not_track: true
 enable_cookies: false
