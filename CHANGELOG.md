@@ -1,3 +1,9 @@
+# v1.2.0
+##  12/23/2020
+
+1. [](#new)
+    * Added Grav Admin Plugin Dashboard integration
+
 # v1.1.0
 ##  12/23/2020
 

@@ -4,6 +4,13 @@ The **Matomo** Plugin is an extension for [Grav CMS](http://github.com/getgrav/g
 
 <a href="https://www.buymeacoffee.com/nicohood" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
 
+## Features
+
+* Easy server-side tracking
+* Matomo Dashboard integrated in Grav Admin Plugin
+* Optional Cookie tracking
+* Optional Javascript tracking
+
 ## Installation
 
 Installing the Matomo plugin can be done in one of three ways: The GPM (Grav Package Manager) installation method lets you quickly install the plugin with a simple terminal command, the manual method lets you do so via a zip file, and the admin method lets you do so via the Admin Plugin.
@@ -58,6 +65,15 @@ token: ''
 respect_do_not_track: true
 enable_cookies: false
 enable_javascript: false
+
+# Grav admin plugin dashboard settings
+# The dashboard token must only have read access:
+# https://matomo.org/docs/embed-matomo-reports/#embed-piwik-widgets-on-a-password-protected-or-private-page
+dashboard_token: ''
+# Specify a different site id for the dashboard.
+# This is useful if you have a test and production environment
+# and always want to show the production stats in the admin panel.
+dashboard_site_id: ''
 ```
 
 Note that if you use the Admin Plugin, a file with your configuration named matomo.yaml will be saved in the `user/config/plugins/`-folder once the configuration is saved in the Admin.
