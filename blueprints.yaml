@@ -100,3 +100,21 @@ form:
             0: PLUGIN_ADMIN.DISABLED
           validate:
             type: bool
+
+    dashboard:
+      type: section
+      title: PLUGIN_MATOMO.DASHBOARD
+
+      fields:
+        dashboard_token:
+          type: text
+          label: PLUGIN_MATOMO.DASHBOARD_TOKEN
+          help: PLUGIN_MATOMO.DASHBOARD_TOKEN_HELP
+
+        dashboard_site_id:
+          type: number
+          placeholder: '1'
+          label: PLUGIN_MATOMO.DASHBOARD_SITE_ID
+          help: PLUGIN_MATOMO.DASHBOARD_SITE_ID_HELP
+          validate:
+            min: 1

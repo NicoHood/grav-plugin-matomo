@@ -49,10 +49,12 @@ class MatomoPlugin extends Plugin
     {
         // Don't proceed if we are in the admin plugin
         if ($this->isAdmin()) {
-            $this->enable([
-                'onTwigTemplatePaths' => ['onTwigAdminTemplatePaths', 0],
-                'onAdminMenu' => ['onAdminMenu', 0]
-            ]);
+            if ($this->grav['config']->get('plugins.matomo.dashboard_token')) {
+                $this->enable([
+                    'onTwigTemplatePaths' => ['onTwigAdminTemplatePaths', 0],
+                    'onAdminMenu' => ['onAdminMenu', 0]
+                ]);
+            }
 
             return;
         }
