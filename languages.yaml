@@ -13,3 +13,5 @@ en:
     RESPECT_DO_NOT_TRACK_HELP: 'If the browser sends a "Do Not Track" header, the visit will not be counted.'
     ENABLE_COOKIES: 'Enable Cookies'
     ENABLE_COOKIES_HELP: 'Can be used to set cookies for better user tracking. Note that this may require an idditional cookie banner to be GDPR/DSGVO compliant.'
+    ENABLE_JAVASCRIPT: 'Enable Javascript'
+    ENABLE_JAVASCRIPT_HELP: 'Enable client side tracking via javascript rather than the server side php tracker.'

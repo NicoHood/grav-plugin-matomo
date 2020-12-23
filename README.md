@@ -1,6 +1,6 @@
 # Matomo Plugin
 
-The **Matomo** Plugin is an extension for [Grav CMS](http://github.com/getgrav/grav). It integrates Matomo analytics into Grav CMS. Unlike other plugins this supports **server side tracking** via [Matomo PHP Tracking API](https://github.com/matomo-org/matomo-php-tracker). This plugin **requires no client side Javascript** but is easier to use compared to [Matomo Log Analysis](https://matomo.org/docs/log-analytics-tool-how-to/). Optional Javascript support will be added shortly.
+The **Matomo** Plugin is an extension for [Grav CMS](http://github.com/getgrav/grav). It integrates Matomo analytics into Grav CMS. Unlike other plugins this supports **server side tracking** via [Matomo PHP Tracking API](https://github.com/matomo-org/matomo-php-tracker). This plugin **requires no client side Javascript** but is easier to use compared to [Matomo Log Analysis](https://matomo.org/docs/log-analytics-tool-how-to/).
 
 <a href="https://www.buymeacoffee.com/nicohood" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
 
@@ -57,6 +57,7 @@ token: ''
 # Privacy settings
 respect_do_not_track: true
 enable_cookies: false
+enable_javascript: false
 ```
 
 Note that if you use the Admin Plugin, a file with your configuration named matomo.yaml will be saved in the `user/config/plugins/`-folder once the configuration is saved in the Admin.
@@ -65,7 +66,9 @@ It is **recommended to set the token via environment variables** and the [grav d
 
 ## Usage
 
-Simply configure your matomo host in the config and you are ready to go! Please note, that by default this plugin is **configured privacy focussed**. You and enable additional features like tracking with cookies or ignoring the "Do Not Track" header in the config. The default config will only track the visited url, ip, referrer, language, browser/user agent, country (via ip lookup, if enabled on matomo) which is similar to [Matomo Log Analysis](https://matomo.org/docs/log-analytics-tool-how-to/), just that this plugin is more easy to use, extensible and gives instant results.
+Simply configure your matomo host in the config and you are ready to go! Please note, that by default this plugin is **configured privacy focussed**. You and enable additional features like tracking with cookies, javascript or ignoring the "Do Not Track" header in the config. **Note:** Ignoring the "Do Not Track" header only makes sense when using the php tracker, not the javascript code. That's because the matomo instance will also evaluate the header and ignore the request.
+
+The default config will only track the visited url, ip, referrer, language, browser/user agent, country (via ip lookup, if enabled on matomo) which is similar to [Matomo Log Analysis](https://matomo.org/docs/log-analytics-tool-how-to/), just that this plugin is more easy to use, extensible and gives instant results.
 
 If you have any improvement, please do not hesitate to file an issue.
 
@@ -75,7 +78,6 @@ If you have any improvement, please do not hesitate to file an issue.
 
 ## To Do
 
-- [ ] Add Javascript tracking as an option
 - [ ] Track events like form submissions with an additional form action
 - [ ] Add twig templates/css to also track impressions of objects via tracking pixel and mouseover
 

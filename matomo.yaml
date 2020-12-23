@@ -11,3 +11,4 @@ token: ''
 # Privacy settings
 respect_do_not_track: true
 enable_cookies: false
+enable_javascript: false

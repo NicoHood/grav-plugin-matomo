@@ -1,7 +1,7 @@
 name: Matomo
 slug: matomo
 type: plugin
-version: 1.0.0
+version: 1.1.0
 description: Integrate Matomo analytics into Grav CMS
 icon: bar-chart
 author:
@@ -81,6 +81,18 @@ form:
           type: toggle
           label: PLUGIN_MATOMO.ENABLE_COOKIES
           help: PLUGIN_MATOMO.ENABLE_COOKIES_HELP
+          highlight: 1
+          default: 0
+          options:
+            1: PLUGIN_ADMIN.ENABLED
+            0: PLUGIN_ADMIN.DISABLED
+          validate:
+            type: bool
+
+        enable_javascript:
+          type: toggle
+          label: PLUGIN_MATOMO.ENABLE_JAVASCRIPT
+          help: PLUGIN_MATOMO.ENABLE_JAVASCRIPT_HELP
           highlight: 1
           default: 0
           options:

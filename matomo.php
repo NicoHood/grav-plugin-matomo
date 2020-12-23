@@ -54,9 +54,8 @@ class MatomoPlugin extends Plugin
 
         // Enable the main events we are interested in
         $this->enable([
-            'onPageInitialized' => [
-                ['onPageInitialized', 0]
-            ],
+            'onPageInitialized' => ['onPageInitialized', 0],
+            'onTwigTemplatePaths' => ['onTwigTemplatePaths', 0]
         ]);
     }
 
@@ -71,6 +70,8 @@ class MatomoPlugin extends Plugin
         }
 
         // Check if client set "Do Not Track" header
+        // NOTE: Ignoring the header only works for php tracking, not for javascript tracking.
+        // That's because the matomo instance will also evaluate the header and ignore the request.
         if ($config->get('respect_do_not_track', true)) {
             if (isset($_SERVER['HTTP_DNT']) && $_SERVER['HTTP_DNT'] == 1) {
                 return;
@@ -83,6 +84,18 @@ class MatomoPlugin extends Plugin
 
         if (!$matomo_url || !$site_id || !$token || $matomo_url === 'https://example.tld') {
             throw new \RuntimeException($this->grav['language']->translate('PLUGIN_MATOMO.INVALID_CONFIG'));
+        }
+
+        // Add javascript tracking code (and disable php tracker to avoid duplicate entries)
+        if ($config->get('enable_javascript', false)) {
+            $matomo_js = $this->grav['twig']->processTemplate('js/matomo.js.twig');
+            $this->grav['assets']->addInlineJs($matomo_js,
+            [
+              'type' => 'text/javascript',
+              'priority' => 0,
+              'position' => 'after'
+            ]);
+            return;
         }
 
         // Matomo object
@@ -100,5 +113,13 @@ class MatomoPlugin extends Plugin
         // NOTE: Url, Ip, Referrer, Browser Language and UserAgent is set by the API automatically
         // TODO return value is currently useless: https://github.com/matomo-org/matomo-php-tracker/issues/85
         $ret = $matomoTracker->doTrackPageView($page->title());
+    }
+
+    /**
+     * Add templates directory to twig lookup paths.
+     */
+    public function onTwigTemplatePaths()
+    {
+        $this->grav['twig']->twig_paths[] = __DIR__ . '/templates';
     }
 }
