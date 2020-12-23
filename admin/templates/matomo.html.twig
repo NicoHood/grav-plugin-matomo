@@ -1,0 +1,31 @@
+{% extends 'partials/base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+    #admin-main {
+        background: #FFFFFF;
+    }
+
+    #admin-main .content-wrapper .content-padding {
+        height: 100% !important;
+        overflow: hidden !important;
+        padding: 0.5rem 0 0 1.5rem !important;
+    }
+    </style>
+{% endblock %}
+
+{% block titlebar %}
+    <h1><i class="fa fa-fw fa-bar-chart"></i> {{ "PLUGIN_MATOMO.DASHBOARD_HEADLINE"|t }} <a href="{{ config.plugins.matomo.matomo_url }}" target="_blank" title="Dashboard Login"><i class="fa fa-fw fa-external-link" style="font-size: smaller;"></i></h1>
+{% endblock %}
+
+{% block content %}
+{% endblock %}
+
+{% block content_wrapper %}
+<div class="content-wrapper">
+    <div class="content-padding">
+      <iframe class="stats-frame" scrolling="yes" src="{{ config.plugins.matomo.matomo_url|trim|rtrim('/') }}/index.php?module=Widgetize&action=iframe&moduleToWidgetize=Dashboard&actionToWidgetize=index&idSite={{ config.plugins.matomo.dashboard_site_id|default(config.plugins.matomo.site_id)|default(1) }}&token_auth={{ config.plugins.matomo.dashboard_token }}&period=week&date=yesterday" frameborder="0" marginheight="0" marginwidth="0" width="100%" height="100%"></iframe>
+    </div>
+</div>
+{% endblock %}

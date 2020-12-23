@@ -49,6 +49,11 @@ class MatomoPlugin extends Plugin
     {
         // Don't proceed if we are in the admin plugin
         if ($this->isAdmin()) {
+            $this->enable([
+                'onTwigTemplatePaths' => ['onTwigAdminTemplatePaths', 0],
+                'onAdminMenu' => ['onAdminMenu', 0]
+            ]);
+
             return;
         }
 
@@ -57,6 +62,22 @@ class MatomoPlugin extends Plugin
             'onPageInitialized' => ['onPageInitialized', 0],
             'onTwigTemplatePaths' => ['onTwigTemplatePaths', 0]
         ]);
+    }
+
+    /**
+     * Add plugin templates path
+     */
+    public function onTwigAdminTemplatePaths()
+    {
+        $this->grav['twig']->twig_paths[] = __DIR__ . '/admin/templates';
+    }
+
+    /**
+     * Add navigation item to the admin plugin
+     */
+    public function onAdminMenu()
+    {
+        $this->grav['twig']->plugins_hooked_nav['Matomo'] = ['route' => 'matomo', 'icon' => 'fa-bar-chart'];
     }
 
     public function onPageInitialized(Event $event)

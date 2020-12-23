@@ -12,3 +12,12 @@ token: ''
 respect_do_not_track: true
 enable_cookies: false
 enable_javascript: false
+
+# Grav admin plugin dashboard settings
+# The dashboard token must only have read access:
+# https://matomo.org/docs/embed-matomo-reports/#embed-piwik-widgets-on-a-password-protected-or-private-page
+dashboard_token: ''
+# Specify a different site id for the dashboard.
+# This is useful if you have a test and production environment
+# and always want to show the production stats in the admin panel.
+dashboard_site_id: ''
