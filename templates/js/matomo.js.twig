@@ -9,7 +9,7 @@ _paq.push(['disableCookies']);
 _paq.push(['trackPageView']);
 _paq.push(['enableLinkTracking']);
 (function() {
-  var u="//{{ config.plugins.matomo.matomo_url|replace({'https://': '', 'https://': ''}) }}/";
+  var u="//{{ config.plugins.matomo.matomo_url|replace({'https://': '', 'https://': ''})|trim|rtrim('/') }}/";
   _paq.push(['setTrackerUrl', u+'matomo.php']);
   _paq.push(['setSiteId', {{ config.plugins.matomo.site_id }}]);
   var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
