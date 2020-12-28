@@ -18,6 +18,6 @@ en:
     DASHBOARD_HEADLINE: 'Matomo Dashboard'
     DASHBOARD: 'Dashboard'
     DASHBOARD_SITE_ID: 'Dashboard Site Id'
-    DASHBOARD_SITE_ID: 'Optional Side Id to show in Dashboard. Defaults to the tracked site id.'
+    DASHBOARD_SITE_ID_HELP: 'Optional Side Id to show in Dashboard. Defaults to the tracked site id.'
     DASHBOARD_TOKEN: 'Dashboard Token'
     DASHBOARD_TOKEN_HELP: 'To use the dashboard you must add a new user with only read access: https://matomo.org/docs/embed-matomo-reports/#embed-piwik-widgets-on-a-password-protected-or-private-page'
