@@ -1,3 +1,9 @@
+# v1.2.1
+##  12/31/2020
+
+1. [](#bugfix)
+    * Fixed language string to support Grav 1.7
+
 # v1.2.0
 ##  12/23/2020
 

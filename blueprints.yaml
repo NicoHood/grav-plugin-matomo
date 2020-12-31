@@ -1,7 +1,7 @@
 name: Matomo
 slug: matomo
 type: plugin
-version: 1.2.0
+version: 1.2.1
 description: Integrate Matomo analytics into Grav CMS
 icon: bar-chart
 author:
