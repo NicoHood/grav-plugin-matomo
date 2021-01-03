@@ -10,6 +10,7 @@ The **Matomo** Plugin is an extension for [Grav CMS](http://github.com/getgrav/g
 * Matomo Dashboard integrated in Grav Admin Plugin
 * Optional Cookie tracking
 * Optional Javascript tracking
+* Grav 1.6 and 1.7 supported
 
 ## Installation
 
