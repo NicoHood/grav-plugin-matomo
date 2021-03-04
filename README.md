@@ -66,6 +66,15 @@ token: ''
 respect_do_not_track: true
 enable_cookies: false
 enable_javascript: false
+# Array of blocked client IP addresses for which tracking will be disabled.
+blockedIpAddresses: []
+# Array of blocked client IPv4 and/or IPv6 address ranges in the form
+# ["192.177.204.1-192.177.204.254", "2001:db8::1-2001:db8::fe", ...].
+# In addition to numerical ranges, the keywords "private", "loopback", "link-local" are recognized,
+# designating special IPv4 and IPv6 ranges (see RFCs 6890, 4193, 4291).
+blockedIpRanges: ["private", "loopback", "link-local"]
+# Name of a blocking cookie, which disables Matomo JS and PHP tracking, when set.
+blockingCookie: "blockMatomo"
 
 # Grav admin plugin dashboard settings
 # The dashboard token must only have read access:

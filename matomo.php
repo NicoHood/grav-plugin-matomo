@@ -101,6 +101,24 @@ class MatomoPlugin extends Plugin
             }
         }
 
+        // Don't proceed if a blocking cookie is set
+        $blockingCookieName = $config->get('blockingCookie', '');
+        if (!empty($blockingCookieName) && !empty($_COOKIE[$blockingCookieName])) {
+            return;
+        }
+
+        // Don't proceed if the IP address is blocked
+        if (in_array($_SERVER['REMOTE_ADDR'], $config->get('blockedIpAddresses', []))) {
+            return;
+        }
+
+        // Don't proceed if the IP address is within a blocked range
+        foreach ($config->get('blockedIpRanges', []) as $blockedIpRange) {
+            if ($this->inIPAddressRange($this->packedIPAddress($_SERVER['REMOTE_ADDR']), $blockedIpRange)) {
+                return;
+            }
+        }
+
         $matomo_url = $config->get('matomo_url');
         $site_id = $config->get('site_id');
         $token = $config->get('token');
@@ -144,5 +162,54 @@ class MatomoPlugin extends Plugin
     public function onTwigTemplatePaths()
     {
         $this->grav['twig']->twig_paths[] = __DIR__ . '/templates';
+    }
+
+    /**
+     * Returns a packed IP address which can be directly compared to another packed IP address
+     * @param string $humanReadableIPAddress IPv4 or IPv6 address in human-readable notation
+     * @return string (16 byte packed representation)
+     */
+    private function packedIPAddress(string $humanReadableIPAddress): string
+    {
+        $result = inet_pton($humanReadableIPAddress);
+
+        if ($result == FALSE)
+            return $this->packedIPAddress('::0');
+        elseif (strlen($result) == 16)
+            return $result;  // IPv6 native
+        else
+            return "\0\0\0\0\0\0\0\0\0\0\0\0" . $result;  // IPv4, expanded to IPv6 compatible length
+    }
+
+    /**
+     * Returns TRUE, if a packed IP address is within the specified address range
+     * @param string $packedAddress
+     * @param string $range
+     * @return bool
+     * @noinspection SpellCheckingInspection
+     */
+    private function inIPAddressRange(string $packedAddress, string $range): bool
+    {
+        if ($range === 'private') {  // RFC 6890, RFC 4193
+            return ($this->inIPAddressRange($packedAddress, "10.0.0.0-10.255.255.255")
+                || $this->inIPAddressRange($packedAddress, "172.16.0.0-172.31.255.255")
+                || $this->inIPAddressRange($packedAddress, "192.168.0.0-192.168.255.255")
+                || $this->inIPAddressRange($packedAddress, "fc00::-fdff:ffff:ffff:ffff:ffff:ffff:ffff:ffff"));
+        } elseif ($range === 'loopback') {  // RFC 6890
+            return ($this->inIPAddressRange($packedAddress, "127.0.0.1-127.255.255.255")
+                || $this->inIPAddressRange($packedAddress, "::1-::1"));
+        } elseif ($range === 'link-local') {  // RFC 6890, RFC 4291
+            return ($this->inIPAddressRange($packedAddress, "169.254.0.0-169.254.255.255")
+                || $this->inIPAddressRange($packedAddress, "fe80::-febf:ffff:ffff:ffff:ffff:ffff:ffff:ffff"));
+        } else {
+            $rangeLimits = explode('-', $range);
+            if (count($rangeLimits) == 2) {
+                $lowerLimit = $this->packedIPAddress($rangeLimits[0]);
+                $upperLimit = $this->packedIPAddress($rangeLimits[1]);
+                return $lowerLimit <= $packedAddress && $packedAddress <= $upperLimit;
+            }
+        }
+
+        return FALSE;
     }
 }

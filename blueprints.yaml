@@ -101,6 +101,29 @@ form:
           validate:
             type: bool
 
+        blockedIpAddresses:
+          type: array
+          size: large
+          label: PLUGIN_MATOMO.BLOCKED_IP_ADDRESSES
+          help: PLUGIN_MATOMO.BLOCKED_IP_ADDRESSES_HELP
+          placeholder_value: PLUGIN_MATOMO.BLOCKED_IP_ADDRESSES_VALUE
+          value_only: true
+
+        blockedIpRanges:
+          type: array
+          size: large
+          label: PLUGIN_MATOMO.BLOCKED_IP_RANGES
+          help: PLUGIN_MATOMO.BLOCKED_IP_RANGES_HELP
+          placeholder_value: PLUGIN_MATOMO.BLOCKED_IP_RANGES_VALUE
+          value_only: true
+
+        blockingCookie:
+          type: text
+          label: PLUGIN_MATOMO.BLOCKING_COOKIE
+          help: PLUGIN_MATOMO.BLOCKING_COOKIE_HELP
+          size: small
+          default: "blockMatomo"
+
     dashboard:
       type: section
       title: PLUGIN_MATOMO.DASHBOARD
