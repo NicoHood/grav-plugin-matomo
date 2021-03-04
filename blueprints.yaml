@@ -141,3 +141,20 @@ form:
           help: PLUGIN_MATOMO.DASHBOARD_SITE_ID_HELP
           validate:
             min: 1
+
+    development:
+      type: section
+      title: PLUGIN_MATOMO.DEVELOPMENT
+
+      fields:
+        debug:
+          type: toggle
+          label: PLUGIN_MATOMO.ENABLE_DEBUG
+          help: PLUGIN_MATOMO.ENABLE_DEBUG_HELP
+          highlight: 1
+          default: 0
+          options:
+            1: PLUGIN_ADMIN.ENABLED
+            0: PLUGIN_ADMIN.DISABLED
+          validate:
+            type: bool

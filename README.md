@@ -84,6 +84,10 @@ dashboard_token: ''
 # This is useful if you have a test and production environment
 # and always want to show the production stats in the admin panel.
 dashboard_site_id: ''
+
+# Development settings
+# Enable this to add debug output about blocking reasons to the page's HTML source ('Matomo tracking blocked').
+debug: false
 ```
 
 Note that if you use the Admin Plugin, a file with your configuration named matomo.yaml will be saved in the `user/config/plugins/`-folder once the configuration is saved in the Admin.

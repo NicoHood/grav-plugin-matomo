@@ -1,6 +1,5 @@
 en:
   PLUGIN_MATOMO:
-    INVALID_CONFIG: 'Invalid Matomo configuration detected'
     CONNECTION: 'Connection'
     MATOMO_URL: 'Matomo URL'
     MATOMO_URL_HELP: 'The URL of your matomo installation'
@@ -29,3 +28,6 @@ en:
     DASHBOARD_SITE_ID_HELP: 'Optional Side Id to show in Dashboard. Defaults to the tracked site id.'
     DASHBOARD_TOKEN: 'Dashboard Token'
     DASHBOARD_TOKEN_HELP: 'To use the dashboard you must add a new user with only read access: https://matomo.org/docs/embed-matomo-reports/#embed-piwik-widgets-on-a-password-protected-or-private-page'
+    DEVELOPMENT: 'Development'
+    ENABLE_DEBUG: 'Enable Debug Output'
+    ENABLE_DEBUG_HELP: "Enable this to add debug output about blocking reasons to the page's HTML source."
