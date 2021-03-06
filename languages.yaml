@@ -1,6 +1,5 @@
 en:
   PLUGIN_MATOMO:
-    INVALID_CONFIG: 'Invalid Matomo configuration detected'
     CONNECTION: 'Connection'
     MATOMO_URL: 'Matomo URL'
     MATOMO_URL_HELP: 'The URL of your matomo installation'
@@ -12,12 +11,23 @@ en:
     RESPECT_DO_NOT_TRACK: 'Respect "Do Not Track" browser setting'
     RESPECT_DO_NOT_TRACK_HELP: 'If the browser sends a "Do Not Track" header, the visit will not be counted.'
     ENABLE_COOKIES: 'Enable Cookies'
-    ENABLE_COOKIES_HELP: 'Can be used to set cookies for better user tracking. Note that this may require an idditional cookie banner to be GDPR/DSGVO compliant.'
+    ENABLE_COOKIES_HELP: 'Can be used to set cookies for better user tracking. Note that this may require an additional cookie banner to be GDPR/DSGVO compliant.'
     ENABLE_JAVASCRIPT: 'Enable Javascript'
     ENABLE_JAVASCRIPT_HELP: 'Enable client side tracking via javascript rather than the server side php tracker.'
+    BLOCKED_IP_ADDRESSES: "Blocked Client IP Addresses"
+    BLOCKED_IP_ADDRESSES_HELP: "Disables Matomo tracking for clients on the given IP addresses."
+    BLOCKED_IP_ADDRESSES_VALUE: "IP address"
+    BLOCKED_IP_RANGES: "Blocked Client IP Address Ranges"
+    BLOCKED_IP_RANGES_HELP: "Disables Matomo tracking for clients on the given IPv4 or IPv6 address ranges."
+    BLOCKED_IP_RANGES_VALUE: "IP range (e.g. '10.4.3.1-10.4.3.20'), or 'private', 'loopback', or 'link-local'"
+    BLOCKING_COOKIE: "Blocking Cookie"
+    BLOCKING_COOKIE_HELP: "Name of a blocking cookie, which disables Matomo tracking, when set."
     DASHBOARD_HEADLINE: 'Matomo Dashboard'
     DASHBOARD: 'Dashboard'
     DASHBOARD_SITE_ID: 'Dashboard Site Id'
     DASHBOARD_SITE_ID_HELP: 'Optional Side Id to show in Dashboard. Defaults to the tracked site id.'
     DASHBOARD_TOKEN: 'Dashboard Token'
     DASHBOARD_TOKEN_HELP: 'To use the dashboard you must add a new user with only read access: https://matomo.org/docs/embed-matomo-reports/#embed-piwik-widgets-on-a-password-protected-or-private-page'
+    DEVELOPMENT: 'Development'
+    ENABLE_DEBUG: 'Enable Debug Output'
+    ENABLE_DEBUG_HELP: "Enable this to add debug output about blocking reasons to the page's HTML source."

@@ -89,6 +89,7 @@ class MatomoPlugin extends Plugin
         // Merge configs and then check for the active flag per page
         $config = $this->mergeConfig($page);
         if (!$config->get('active', true)) {
+            $this->documentBlockingReason("Plugin is not active for this page");
             return;
         }
 
@@ -97,6 +98,28 @@ class MatomoPlugin extends Plugin
         // That's because the matomo instance will also evaluate the header and ignore the request.
         if ($config->get('respect_do_not_track', true)) {
             if (isset($_SERVER['HTTP_DNT']) && $_SERVER['HTTP_DNT'] == 1) {
+                $this->documentBlockingReason("Client requests 'DO NOT TRACK'");
+                return;
+            }
+        }
+
+        // Don't proceed if a blocking cookie is set
+        $blockingCookieName = $config->get('blockingCookie');
+        if (!empty($blockingCookieName) && !empty($_COOKIE[$blockingCookieName])) {
+            $this->documentBlockingReason("Blocking cookie \"$blockingCookieName\" is set");
+            return;
+        }
+
+        // Don't proceed if the IP address is blocked
+        if (in_array($_SERVER['REMOTE_ADDR'], $config->get('blockedIpAddresses', []))) {
+            $this->documentBlockingReason("client ip " . $_SERVER['REMOTE_ADDR'] . " is in blockedIps");
+            return;
+        }
+
+        // Don't proceed if the IP address is within a blocked range
+        foreach ($config->get('blockedIpRanges', []) as $blockedIpRange) {
+            if ($this->inIPAddressRange($this->packedIPAddress($_SERVER['REMOTE_ADDR']), $blockedIpRange)) {
+                $this->documentBlockingReason("client ip " . $_SERVER['REMOTE_ADDR'] . " is in range \"" . $blockedIpRange . "\"");
                 return;
             }
         }
@@ -106,7 +129,8 @@ class MatomoPlugin extends Plugin
         $token = $config->get('token');
 
         if (!$matomo_url || !$site_id || !$token || $matomo_url === 'https://example.tld') {
-            throw new \RuntimeException($this->grav['language']->translate('PLUGIN_MATOMO.INVALID_CONFIG'));
+            $this->documentBlockingReason('Invalid Matomo configuration detected');
+            return;
         }
 
         // Add javascript tracking code (and disable php tracker to avoid duplicate entries)
@@ -149,5 +173,64 @@ class MatomoPlugin extends Plugin
     public function onTwigTemplatePaths()
     {
         $this->grav['twig']->twig_paths[] = __DIR__ . '/templates';
+    }
+
+    /**
+     * Documents the reason for blocking Matomo tracking in a JavaScript comment
+     * @param string $reason
+     */
+    private function documentBlockingReason(string $reason)
+    {
+        if ($this->config->get('plugins.matomo.debug', false))
+            $this->grav['assets']->addInlineJs("/* Matomo tracking blocked, reason: $reason */");
+    }
+
+    /**
+     * Returns a packed IP address which can be directly compared to another packed IP address
+     * @param string $humanReadableIPAddress IPv4 or IPv6 address in human-readable notation
+     * @return string (16 byte packed representation)
+     */
+    private function packedIPAddress(string $humanReadableIPAddress): string
+    {
+        $result = inet_pton($humanReadableIPAddress);
+
+        if ($result == false)
+            return $this->packedIPAddress('::0');
+        elseif (strlen($result) == 16)
+            return $result;  // IPv6 native
+        else
+            return "\0\0\0\0\0\0\0\0\0\0\0\0" . $result;  // IPv4, expanded to IPv6 compatible length
+    }
+
+    /**
+     * Returns true if a packed IP address is within the specified address range
+     * @param string $packedAddress
+     * @param string $range
+     * @return bool
+     * @noinspection SpellCheckingInspection
+     */
+    private function inIPAddressRange(string $packedAddress, string $range): bool
+    {
+        if ($range === 'private') {  // RFC 6890, RFC 4193
+            return ($this->inIPAddressRange($packedAddress, "10.0.0.0-10.255.255.255")
+                || $this->inIPAddressRange($packedAddress, "172.16.0.0-172.31.255.255")
+                || $this->inIPAddressRange($packedAddress, "192.168.0.0-192.168.255.255")
+                || $this->inIPAddressRange($packedAddress, "fc00::-fdff:ffff:ffff:ffff:ffff:ffff:ffff:ffff"));
+        } elseif ($range === 'loopback') {  // RFC 6890
+            return ($this->inIPAddressRange($packedAddress, "127.0.0.1-127.255.255.255")
+                || $this->inIPAddressRange($packedAddress, "::1-::1"));
+        } elseif ($range === 'link-local') {  // RFC 6890, RFC 4291
+            return ($this->inIPAddressRange($packedAddress, "169.254.0.0-169.254.255.255")
+                || $this->inIPAddressRange($packedAddress, "fe80::-febf:ffff:ffff:ffff:ffff:ffff:ffff:ffff"));
+        } else {
+            $rangeLimits = explode('-', $range);
+            if (count($rangeLimits) == 2) {
+                $lowerLimit = $this->packedIPAddress($rangeLimits[0]);
+                $upperLimit = $this->packedIPAddress($rangeLimits[1]);
+                return $lowerLimit <= $packedAddress && $packedAddress <= $upperLimit;
+            }
+        }
+
+        return false;
     }
 }
