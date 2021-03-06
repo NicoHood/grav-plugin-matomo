@@ -1,4 +1,15 @@
+# v1.3.0
+
+##  03/06/2021
+
+1. [](#new)
+   
+    * Log php tracker errors instead of failing hard.
+    
+    * Add support for client IP address blocking and a blocking cookie #2
+
 # v1.2.1
+
 ##  12/31/2020
 
 1. [](#bugfix)
