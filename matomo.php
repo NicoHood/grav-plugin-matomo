@@ -135,7 +135,12 @@ class MatomoPlugin extends Plugin
         // Track page view
         // NOTE: Url, Ip, Referrer, Browser Language and UserAgent is set by the API automatically
         // TODO return value is currently useless: https://github.com/matomo-org/matomo-php-tracker/issues/85
-        $ret = $matomoTracker->doTrackPageView($page->title());
+        try {
+            $ret = $matomoTracker->doTrackPageView($page->title());
+        }
+        catch (\RuntimeException $e) {
+            $this->grav['log']->error('Error tracking page view via Matomo: ' . $e->getMessage());
+        }
     }
 
     /**
