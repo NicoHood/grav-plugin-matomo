@@ -89,7 +89,7 @@ class MatomoPlugin extends Plugin
         // Merge configs and then check for the active flag per page
         $config = $this->mergeConfig($page);
         if (!$config->get('active', true)) {
-            $this->documentBlockingReason("Plugin is not active for this page");
+            $this->documentBlockingReason("Plugin is not active for this page.");
             return;
         }
 
@@ -98,7 +98,7 @@ class MatomoPlugin extends Plugin
         // That's because the matomo instance will also evaluate the header and ignore the request.
         if ($config->get('respect_do_not_track', true)) {
             if (isset($_SERVER['HTTP_DNT']) && $_SERVER['HTTP_DNT'] == 1) {
-                $this->documentBlockingReason("Client requests 'DO NOT TRACK'");
+                $this->documentBlockingReason("Client requests 'DO NOT TRACK'.");
                 return;
             }
         }
@@ -106,20 +106,20 @@ class MatomoPlugin extends Plugin
         // Don't proceed if a blocking cookie is set
         $blockingCookieName = $config->get('blockingCookie');
         if (!empty($blockingCookieName) && !empty($_COOKIE[$blockingCookieName])) {
-            $this->documentBlockingReason("Blocking cookie \"$blockingCookieName\" is set");
+            $this->documentBlockingReason("Blocking cookie \"$blockingCookieName\" is set.");
             return;
         }
 
         // Don't proceed if the IP address is blocked
         if (in_array($_SERVER['REMOTE_ADDR'], $config->get('blockedIpAddresses', []))) {
-            $this->documentBlockingReason("client ip " . $_SERVER['REMOTE_ADDR'] . " is in blockedIps");
+            $this->documentBlockingReason("Client ip " . $_SERVER['REMOTE_ADDR'] . " is in blockedIps.");
             return;
         }
 
         // Don't proceed if the IP address is within a blocked range
         foreach ($config->get('blockedIpRanges', []) as $blockedIpRange) {
             if ($this->inIPAddressRange($this->packedIPAddress($_SERVER['REMOTE_ADDR']), $blockedIpRange)) {
-                $this->documentBlockingReason("client ip " . $_SERVER['REMOTE_ADDR'] . " is in range \"" . $blockedIpRange . "\"");
+                $this->documentBlockingReason("Client ip " . $_SERVER['REMOTE_ADDR'] . " is in range \"" . $blockedIpRange . "\".");
                 return;
             }
         }
@@ -129,7 +129,7 @@ class MatomoPlugin extends Plugin
         $token = $config->get('token');
 
         if (!$matomo_url || !$site_id || !$token || $matomo_url === 'https://example.tld') {
-            $this->documentBlockingReason('Invalid Matomo configuration detected');
+            $this->documentBlockingReason('Invalid Matomo configuration detected.');
             return;
         }
 
@@ -181,8 +181,9 @@ class MatomoPlugin extends Plugin
      */
     private function documentBlockingReason(string $reason)
     {
-        if ($this->config->get('plugins.matomo.debug', false))
+        if ($this->config->get('plugins.matomo.debug', false)) {
             $this->grav['assets']->addInlineJs("/* Matomo tracking blocked, reason: $reason */");
+        }
     }
 
     /**
@@ -194,12 +195,17 @@ class MatomoPlugin extends Plugin
     {
         $result = inet_pton($humanReadableIPAddress);
 
-        if ($result == false)
+        if ($result == false) {
             return $this->packedIPAddress('::0');
-        elseif (strlen($result) == 16)
-            return $result;  // IPv6 native
-        else
-            return "\0\0\0\0\0\0\0\0\0\0\0\0" . $result;  // IPv4, expanded to IPv6 compatible length
+        }
+        // IPv6 native
+        elseif (strlen($result) == 16) {
+            return $result;
+        }
+        // IPv4, expanded to IPv6 compatible length
+        else {
+            return "\0\0\0\0\0\0\0\0\0\0\0\0" . $result;
+        }
     }
 
     /**
