@@ -33,8 +33,7 @@ class MatomoPlugin extends Plugin
     }
 
     /**
-    * Composer autoload.
-    *is
+    * Composer autoload
     * @return ClassLoader
     */
     public function autoload(): ClassLoader
